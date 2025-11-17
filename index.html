@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LFGC AI Tutor - Lead-Forte Gate College</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e22ce 100%); min-height: 100vh; padding: 20px; }
+        .container { max-width: 950px; margin: 0 auto; }
+        
+        /* School Header */
+        .school-header { 
+            background: rgba(255, 255, 255, 0.95); 
+            border-radius: 20px; 
+            padding: 30px; 
+            margin-bottom: 20px; 
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2); 
+            text-align: center; 
+            animation: fadeInDown 0.8s ease; 
+        }
+        .logo-section { 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 20px; 
+            margin-bottom: 15px; 
+            flex-wrap: wrap; 
+        }
+        .school-logo { 
+            width: 80px; 
+            height: 80px; 
+            border-radius: 50%; 
+            background: linear-gradient(135deg, #1e3c72 0%, #7e22ce 100%); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 2em; 
+            color: white; 
+            font-weight: bold; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2); 
+        }
+        .school-name { 
+            font-size: 2.2em; 
+            font-weight: 800; 
+            background: linear-gradient(135deg, #1e3c72 0%, #7e22ce 100%); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            background-clip: text; 
+        }
+        .school-location { 
+            color: #666; 
+            font-size: 1.1em; 
+            margin-bottom: 10px; 
+        }
+        .exhibition-title { 
+            background: linear-gradient(135deg, #1e3c72 0%, #7e22ce 100%); 
+            color: white; 
+            padding: 12px 30px; 
+            border-radius: 50px; 
+            display: inline-block; 
+            font-weight: 700; 
+            font-size: 1.2em; 
+            box-shadow: 0 5px 15px rgba(30, 60, 114, 0.3); 
+        }
+        
+        /* Welcome Banner */
+        .welcome-banner { 
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%); 
+            padding: 20px; 
+            border-radius: 15px; 
+            margin-bottom: 20px; 
+            text-align: center; 
+            box-shadow: 0 8px 30px rgba(251, 191, 36, 0.4); 
+            animation: fadeInDown 1s ease; 
+        }
+        .welcome-banner h2 { 
+            color: white; 
+            font-size: 2em; 
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2); 
+            margin-bottom: 8px; 
+        }
+        .welcome-banner p { 
+            color: rgba(255, 255, 255, 0.95); 
+            font-size: 1.1em; 
+            font-weight: 600; 
+        }
+        
+        /* LFC AI Tutor Instructor Badge */
+        .instructor-badge {
+            background: linear-gradient(135deg, #7e22ce 0%, #6b21a8 100%);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(126, 34, 206, 0.4);
+            animation: fadeInDown 1.2s ease;
+        }
+        .instructor-badge h3 {
+            margin-bottom: 5px;
+            font-size: 1.3em;
+        }
+        .instructor-badge p {
+            opacity: 0.95;
+            font-size: 0.95em;
+        }
+        
+        /* Header (unused but kept for structure) */
+        .header { 
+            text-align: center; 
+            color: white; 
+            margin-bottom: 25px; 
+            animation: fadeInDown 0.8s ease; 
+        }
+        .header h1 { 
+            font-size: 2.8em; 
+            margin-bottom: 10px; 
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3); 
+        }
+        .header p { 
+            font-size: 1.2em; 
+            opacity: 0.95; 
+        }
+        
+        /* Capabilities Grid */
+        .capabilities-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+            animation: fadeInUp 1s ease;
+        }
+        .capabilities-section h3 {
+            text-align: center;
+            color: #1e3c72;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+        .capabilities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+        .capability-card {
+            background: linear-gradient(135deg, #f8f9ff 0%, #fff 100%);
+            padding: 18px;
+            border-radius: 12px;
+            border: 2px solid #e0e0e0;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+        .capability-card:hover {
+            transform: translateY(-5px);
+            border-color: #1e3c72;
+            box-shadow: 0 8px 20px rgba(30, 60, 114, 0.3);
+        }
+        .capability-icon {
+            font-size: 2.5em;
+            margin-bottom: 8px;
+        }
+        .capability-card strong {
+            display: block;
+            color: #1e3c72;
+            font-size: 1em;
+            margin-bottom: 5px;
+        }
+        .capability-card p {
+            font-size: 0.8em;
+            color: #666;
+            margin: 0;
+        }
+        
+        /* Main Card */
+        .card { 
+            background: white; 
+            border-radius: 20px; 
+            padding: 40px; 
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3); 
+            animation: fadeInUp 0.8s ease; 
+        }
+        
+        /* Form Elements */
+        .form-group { margin-bottom: 25px; position: relative; }
+        label { 
+            display: block; 
+            font-weight: 600; 
+            color: #333; 
+            margin-bottom: 8px; 
+            font-size: 1.1em; 
+        }
+        input[type="text"], select { 
+            width: 100%; 
+            padding: 15px; 
+            border: 2px solid #e0e0e0; 
+            border-radius: 10px; 
+            font-size: 1em; 
+            transition: all 0.3s ease; 
+        }
+        input:focus, select:focus { 
+            outline: none; 
+            border-color: #1e3c72; 
+            box-shadow: 0 0 0 3px rgba(30, 60, 114, 0.1); 
+        }
+        select { cursor: pointer; background: white; }
+        .topic-count { 
+            font-size: 0.9em; 
+            color: #666; 
+            margin-top: 5px; 
+            font-style: italic; 
+        }
+        
+        /* Buttons */
+        .btn { 
+            width: 100%; 
+            padding: 18px; 
+            background: linear-gradient(135deg, #1e3c72 0%, #7e22ce 100%); 
+            color: white; 
+            border: none; 
+            border-radius: 10px; 
+            font-size: 1.2em; 
+            font-weight: 600; 
+            cursor: pointer; 
+            transition: transform 0.2s ease, box-shadow 0.2s ease; 
+            margin-top: 10px; 
+        }
+        .btn:hover:not(:disabled) { 
+            transform: translateY(-2px); 
+            box-shadow: 0 10px 30px rgba(30, 60, 114, 0.4); 
+        }
+        .btn:disabled { opacity: 0.6; cursor: not-allowed; }
+        .btn-secondary { 
+            background: linear-gradient(135deg, #4caf50 0%, #45a049 100%); 
+            margin-top: 20px; 
+        }
+        
+        /* Loading */
+        .loading { 
+            display: none; 
+            text-align: center; 
+            padding: 40px; 
+        }
+        .spinner { 
+            border: 4px solid #f3f3f3; 
+            border-top: 4px solid #1e3c72; 
+            border-radius: 50%; 
+            width: 50px; 
+            height: 50px; 
+            animation: spin 1s linear infinite; 
+            margin: 0 auto 20px; 
+        }
+        
+        /* Response Container */
+        .response-container { 
+            display: none; 
+            margin-top: 30px; 
+            animation: fadeIn 0.5s ease; 
+        }
+        
+        /* Lesson Content */
+        .lesson-content { 
+            background: #f8f9ff; 
+            padding: 30px; 
+            border-radius: 15px; 
+            margin-bottom: 25px; 
+        }
+        .lesson-content h3 { 
+            color: #1e3c72; 
+            margin-bottom: 20px; 
+            font-size: 1.5em; 
+        }
+        .markdown-content { line-height: 1.8; color: #333; }
+        .markdown-content h1, .markdown-content h2, .markdown-content h3 { 
+            color: #1e3c72; 
+            margin-top: 20px; 
+            margin-bottom: 10px; 
+        }
+        .markdown-content ul, .markdown-content ol { 
+            margin-left: 25px; 
+            margin-bottom: 15px; 
+        }
+        .markdown-content li { margin-bottom: 8px; }
+        .markdown-content strong { color: #1e3c72; font-weight: 600; }
+        .markdown-content p { margin-bottom: 15px; }
+        
+        /* Enhanced Content Boxes */
+        .summary-box { 
+            background: #fffde7; 
+            border-left: 4px solid #fbbf24; 
+            padding: 20px; 
+            border-radius: 8px; 
+            margin: 20px 0; 
+        }
+        .summary-box h4 { color: #f59e0b; margin-bottom: 10px; }
+        
+        .key-terms-box {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .key-terms-box h4 { color: #1976d2; margin-bottom: 10px; }
+        
+        .study-tips-box {
+            background: #f3e5f5;
+            border-left: 4px solid #7e22ce;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .study-tips-box h4 { color: #6b21a8; margin-bottom: 10px; }
+        
+        .practical-app-box {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .practical-app-box h4 { color: #2e7d32; margin-bottom: 10px; }
+        
+        .next-steps-box {
+            background: linear-gradient(135deg, #7e22ce 0%, #6b21a8 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+        .next-steps-box h4 { color: white; margin-bottom: 10px; }
+        
+        /* Quiz Section */
+        .quiz-section { 
+            background: white; 
+            padding: 25px; 
+            border-radius: 12px; 
+            margin-top: 25px; 
+            border: 2px solid #1e3c72; 
+        }
+        .quiz-section h3 { color: #1e3c72; margin-bottom: 20px; }
+        .quiz-item { 
+            margin-bottom: 25px; 
+            padding: 20px; 
+            background: #f8f9ff; 
+            border-radius: 10px; 
+        }
+        .quiz-item strong { 
+            color: #1e3c72; 
+            display: block; 
+            margin-bottom: 12px; 
+            font-size: 1.05em; 
+        }
+        .quiz-option { 
+            display: block; 
+            padding: 12px; 
+            margin: 8px 0; 
+            background: white; 
+            border: 2px solid #e0e0e0; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            transition: all 0.2s; 
+        }
+        .quiz-option:hover { 
+            border-color: #1e3c72; 
+            background: #f0f8ff; 
+        }
+        .quiz-option.selected {
+            border-color: #1e3c72;
+            background: #f0f8ff;
+            font-weight: 600;
+        }
+        .quiz-option input { margin-right: 10px; }
+        
+        /* Feedback */
+        .feedback-container { margin-top: 25px; }
+        .score-banner { 
+            padding: 25px; 
+            border-radius: 12px; 
+            text-align: center; 
+            margin-bottom: 25px; 
+            font-size: 1.3em; 
+            font-weight: 600; 
+        }
+        .score-excellent { 
+            background: linear-gradient(135deg, #4caf50 0%, #45a049 100%); 
+            color: white; 
+        }
+        .score-good { 
+            background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%); 
+            color: white; 
+        }
+        .score-needs-work { 
+            background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%); 
+            color: white; 
+        }
+        .feedback-item { 
+            background: white; 
+            padding: 20px; 
+            border-radius: 10px; 
+            margin-bottom: 15px; 
+            border-left: 5px solid #ccc; 
+        }
+        .feedback-correct { 
+            border-left-color: #4caf50; 
+            background: #f1f8f4; 
+        }
+        .feedback-incorrect { 
+            border-left-color: #f44336; 
+            background: #fef1f1; 
+        }
+        .feedback-item .question { 
+            font-weight: 600; 
+            color: #1e3c72; 
+            margin-bottom: 8px; 
+        }
+        .feedback-item .answer { margin: 8px 0; }
+        .feedback-item .explanation { 
+            color: #555; 
+            font-style: italic; 
+            margin-top: 10px; 
+            padding-top: 10px; 
+            border-top: 1px dashed #ddd; 
+        }
+        .encouragement-box { 
+            background: linear-gradient(135deg, #7e22ce 0%, #6b21a8 100%); 
+            color: white; 
+            padding: 20px; 
+            border-radius: 10px; 
+            text-align: center; 
+            margin-top: 20px; 
+        }
+        
+        .strengths-box {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+        .strengths-box h4 { color: #2e7d32; margin-bottom: 10px; }
+        
+        .review-box {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+        .review-box h4 { color: #e65100; margin-bottom: 10px; }
+        
+        /* Error & Info */
+        .error {
+            background: #ffebee;
+            color: #c62828;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-weight: 600;
+        }
+
+        /* Utility classes for display control */
+        .hidden { display: none !important; }
+
+        /* Keyframes */
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes fadeInDown { 0% { opacity: 0; transform: translateY(-20px); } 100% { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInUp { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { 0% { opacity: 0; } 100% { opacity: 1; } }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- School Header -->
+        <header class="school-header">
+            <div class="logo-section">
+                <div class="school-logo">LF</div>
+                <h1 class="school-name">Lead-Forte Gate College</h1>
+            </div>
+            <p class="school-location">Lagos, Nigeria</p>
+            <span class="exhibition-title">AI TUTOR SYSTEM</span>
+        </header>
+
+        <!-- Welcome Banner -->
+        <div class="welcome-banner">
+            <h2>Welcome to the Future of Learning!</h2>
+            <p>Your personalized, IGCSE-aligned study partner is here.</p>
+        </div>
+        
+        <!-- LFC AI Tutor Instructor Badge -->
+        <div class="instructor-badge">
+            <h3>🤖 LFGC AI Instructor</h3>
+            <p>Ready to teach you with Nigerian context and real-world examples.</p>
+        </div>
+
+        <!-- Main Card & Form -->
+        <div class="card" id="tutor-card">
+            <div id="form-section">
+                <form id="tutor-form">
+                    <div class="form-group">
+                        <label for="studentName">Your Name:</label>
+                        <input type="text" id="studentName" placeholder="E.g., Tunde or Jane" value="Student" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">Subject:</label>
+                        <select id="subject" required disabled>
+                            <!-- Placeholder option. Subjects will be loaded dynamically from Google Sheet. -->
+                            <option value="" disabled selected>Loading subjects from curriculum...</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="topic">Topic to Learn:</label>
+                        <select id="topic" required disabled>
+                            <option value="" disabled selected>Select a subject first</option>
+                        </select>
+                        <p id="topic-count" class="topic-count">Waiting for curriculum data to load.</p>
+                    </div>
+
+                    <button type="submit" class="btn" id="start-lesson-btn" disabled>
+                        Start Personalized Lesson
+                    </button>
+                </form>
+            </div>
+
+            <!-- Loading State -->
+            <div id="loading-section" class="loading hidden">
+                <div class="spinner"></div>
+                <p id="loading-message">Generating your personalized lesson...</p>
+            </div>
+
+            <!-- Response Container (Lesson/Feedback) -->
+            <div id="response-container" class="response-container hidden">
+                <div id="error-message" class="error hidden"></div>
+                
+                <div id="lesson-view">
+                    <!-- Lesson Content -->
+                    <div class="lesson-content">
+                        <h3 id="lesson-greeting"></h3>
+                        <div id="explanation-content" class="markdown-content"></div>
+                        
+                        <div id="summary-content" class="summary-box"></div>
+                        <div id="key-terms-content" class="key-terms-box"></div>
+                        <div id="practical-application-content" class="practical-app-box"></div>
+                        <div id="study-tips-content" class="study-tips-box"></div>
+                        <div id="next-steps-content" class="next-steps-box"></div>
+                    </div>
+
+                    <!-- Quiz Section -->
+                    <div id="quiz-section" class="quiz-section hidden">
+                        <h3>Test Your Knowledge!</h3>
+                        <div id="quiz-questions">
+                            <!-- Quiz items will be injected here -->
+                        </div>
+                        <button class="btn btn-secondary" id="submit-quiz-btn">Submit Quiz Answers</button>
+                    </div>
+                </div>
+
+                <!-- Feedback View -->
+                <div id="feedback-view" class="hidden">
+                    <h3 class="text-center" style="color: #1e3c72; margin-bottom: 25px;">Quiz Feedback for <span id="feedback-student-name"></span></h3>
+                    
+                    <div id="score-banner" class="score-banner"></div>
+                    
+                    <div id="encouragement-box" class="encouragement-box"></div>
+
+                    <div id="strengths-box" class="strengths-box"></div>
+                    <div id="review-box" class="review-box"></div>
+                    
+                    <div style="margin-top: 30px;">
+                        <h4 style="color: #1e3c72; border-bottom: 2px solid #ddd; padding-bottom: 10px; margin-bottom: 15px;">Detailed Breakdown</h4>
+                        <div id="detailed-feedback-list">
+                            <!-- Detailed feedback items will be injected here -->
+                        </div>
+                    </div>
+                    
+                    <button class="btn" id="start-new-lesson-btn" style="margin-top: 30px;">Start Another Lesson</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Capabilities Section -->
+        <div class="capabilities-section">
+            <h3>AI Tutor Capabilities</h3>
+            <div class="capabilities-grid">
+                <div class="capability-card">
+                    <span class="capability-icon">🇳🇬</span>
+                    <strong>Nigerian Context</strong>
+                    <p>Local examples for better comprehension.</p>
+                </div>
+                <div class="capability-card">
+                    <span class="capability-icon">🎓</span>
+                    <strong>IGCSE Aligned</strong>
+                    <p>Content tailored to international standards.</p>
+                </div>
+                <div class="capability-card">
+                    <span class="capability-icon">📝</span>
+                    <strong>Quizzes & Assessment</strong>
+                    <p>Immediate feedback on your knowledge.</p>
+                </div>
+                <div class="capability-card">
+                    <span class="capability-icon">💡</span>
+                    <strong>Study Tips</strong>
+                    <p>Proven strategies to improve retention.</p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <script>
+        // --- JAVASCRIPT LOGIC ---
+
+        // IMPORTANT: Update N8N_BASE_URL to your actual production webhook URL structure.
+        const N8N_BASE_URL = '/webhook';
+        
+        const TUTOR_WEBHOOK_URL = `${N8N_BASE_URL}/ai-tutor`;
+        const CURRICULUM_WEBHOOK_URL = `${N8N_BASE_URL}/ai-tutor-curriculum`;
+
+        // DOM elements
+        const studentNameInput = document.getElementById('studentName');
+        const subjectSelect = document.getElementById('subject');
+        const topicSelect = document.getElementById('topic');
+        const topicCountP = document.getElementById('topic-count');
+        const startLessonBtn = document.getElementById('start-lesson-btn');
+        const tutorForm = document.getElementById('tutor-form');
+        const loadingSection = document.getElementById('loading-section');
+        const responseContainer = document.getElementById('response-container');
+        const errorMessageDiv = document.getElementById('error-message');
+        const lessonView = document.getElementById('lesson-view');
+        const feedbackView = document.getElementById('feedback-view');
+        const submitQuizBtn = document.getElementById('submit-quiz-btn');
+        const startNewLessonBtn = document.getElementById('start-new-lesson-btn');
+
+        let allCurriculumTopics = [];
+        let uniqueSubjects = [];
+        let currentLessonData = null; 
+        let selectedAnswers = {}; 
+
+        // Utility function to convert simple Markdown-like text (from AI) to HTML
+        function markdownToHtml(markdown) {
+            if (!markdown) return '';
+            
+            // 1. Convert **bold**
+            let html = markdown.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            
+            // 2. Convert lists (Handle both * and - for bullets)
+            const listRegex = /(\n[\s]*[\-\*]\s+.*)/g;
+            html = html.replace(listRegex, '\n<LI_TEMP>$1</LI_TEMP>');
+
+            // 3. Convert paragraphs: wrap lines separated by double newlines in <p>
+            html = html.split('\n\n').map(p => {
+                p = p.trim();
+                if (p.includes('<LI_TEMP>')) {
+                    return p;
+                }
+                if (p.match(/^[\s]*[\-\*\s]/) || p.match(/^[\s]*\d+\./)) {
+                    return p;
+                }
+                return p ? `<p>${p.replace(/\n/g, '<br>')}</p>` : '';
+            }).join('');
+            
+            // 4. Finalize lists
+            html = html.replace(/<LI_TEMP>[\s]*[\-\*]\s+(.*?)<\/LI_TEMP>/g, '<li>$1</li>');
+            html = html.replace(/(<li>.*?<\/li>)/g, '$$$1$$');
+            html = html.replace(/\$\$((?:\s*<li>.*?<\/li>\s*)+)\$\$/g, '<ul>$1</ul>');
+
+            // 5. Handle code/preformatted text
+            html = html.replace(/
